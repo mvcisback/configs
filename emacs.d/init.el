@@ -59,9 +59,6 @@
 ;;------------------------------------------------------------------------------
 ;;-- Ocaml
 ;;------------------------------------------------------------------------------
-(add-to-list 'load-path "~/.elisp/tuareg-mode")
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 (setq auto-mode-alist
       (append '(("\\.ml[ily]?$" . tuareg-mode)
                 ("\\.topml$" . tuareg-mode))
@@ -74,8 +71,16 @@
 ;;------------------------------------------------------------------------------
 (require `nose)
 ;;------------------------------------------------------------------------------
+;;---- EIN (Ipython notebook)
+;;------------------------------------------------------------------------------
+(defalias 'python-indent-line-function 'python-indent-line)
+;;------------------------------------------------------------------------------
 ;;-- Lisp Like
 ;;------------------------------------------------------------------------------
+;;---- Common Lisp
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+  ;; Replace "sbcl" with the path to your implementation
+  (setq inferior-lisp-program "sbcl")
 ;;---- Paredit
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -83,7 +88,9 @@
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+;;------------------------------------------------------------------------------
 ;; Org Mode
+;;------------------------------------------------------------------------------
 (require 'org-latex)
 (setq org-agenda-files (quote ("~/org/agenda.org" "~/org/schedule.org")))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -99,6 +106,11 @@
 (add-to-list 'org-export-latex-packages-alist '("" "minted"))
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 (setq org-src-fontify-natively t)
+;;-- Blogging
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "http://sufficiently-random.com/xmlrpc.php"
+         :username "mvc")))
 ;;##############################################################################
 ;; Chat
 ;;##############################################################################
@@ -106,3 +118,16 @@
   "Connect to IM networks using bitlbee."
   (interactive)
   (erc :server "localhost" :port 6667 :nick "mvc"))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(send-mail-function (quote smtpmail-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
