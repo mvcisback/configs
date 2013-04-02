@@ -6,7 +6,16 @@
 (setq-default tab-width 8)            ;; but maintain correct appearance
 ;;-- Set default browser
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "uzbl-browser")
+      browse-url-generic-program "chromium")
+;; Buffer Management
+(defun kill-other-buffers ()
+  "Kill all buffers but the current one.
+Don't mess with special buffers."
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+      (kill-buffer buffer))))
+(global-set-key (kbd "C-c k") 'kill-other-buffers)
 ;;------------------------------------------------------------------------------
 ;;-- Packages
 ;;------------------------------------------------------------------------------
@@ -52,10 +61,15 @@
 ;; Code
 ;;##############################################################################
 ;;------------------------------------------------------------------------------
+;;--Paren Matching
+;;------------------------------------------------------------------------------
+(require 'paren)
+(setq show-paren-style 'parenthesis)
+(show-paren-mode +1)
+;;------------------------------------------------------------------------------
 ;;--Autopair
 ;;------------------------------------------------------------------------------
-(autopair-global-mode 1)
-(setq autopair-autowrap t)
+(electric-pair-mode +1)
 ;;------------------------------------------------------------------------------
 ;;-- Ocaml
 ;;------------------------------------------------------------------------------
@@ -66,6 +80,7 @@
 ;;------------------------------------------------------------------------------
 ;;-- C
 ;;------------------------------------------------------------------------------
+(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 ;;------------------------------------------------------------------------------
 ;;-- Python
 ;;------------------------------------------------------------------------------
