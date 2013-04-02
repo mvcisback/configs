@@ -37,6 +37,7 @@ Don't mess with special buffers."
 (size-indication-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (load-theme 'zenburn t)
+(set-default-font "Inconsolata-11")
 ;;------------------------------------------------------------------------------
 ;;-- Backups
 ;;------------------------------------------------------------------------------
@@ -133,16 +134,3 @@ Don't mess with special buffers."
   "Connect to IM networks using bitlbee."
   (interactive)
   (erc :server "localhost" :port 6667 :nick "mvc"))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(send-mail-function (quote smtpmail-send-it)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
