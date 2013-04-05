@@ -38,6 +38,7 @@ Don't mess with special buffers."
 (fset 'yes-or-no-p 'y-or-n-p)
 (load-theme 'zenburn t)
 (set-default-font "Inconsolata-11")
+(global-hl-line-mode +1)
 ;;------------------------------------------------------------------------------
 ;;-- Backups
 ;;------------------------------------------------------------------------------
