@@ -26,6 +26,8 @@
 
 (yas-global-mode 1)
 
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
 ;;-- Set default browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium")

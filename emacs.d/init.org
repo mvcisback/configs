@@ -58,6 +58,10 @@
    #+BEGIN_SRC elisp :tangle yes
      (yas-global-mode 1)
    #+END_SRC
+** Jumping around
+#+BEGIN_SRC elisp :tangle yes
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+#+END_SRC
 ** Other
 #+BEGIN_SRC elisp :tangle yes
   ;;-- Set default browser
