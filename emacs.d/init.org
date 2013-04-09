@@ -14,7 +14,7 @@
 #+XSLT:
 * General
 ** Packages
-   #+BEGIN_SRC elisp :tangle yes :export code
+   #+BEGIN_SRC emacs-lisp :tangle yes :export code
    (require 'package)
    (package-initialize)
    (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -22,7 +22,7 @@
                             ("melpa" . "http://melpa.milkbox.net/packages/")))
    #+END_SRC
 ** UI
-   #+BEGIN_SRC elisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
    (setq inhibit-startup-screen t)
    (scroll-bar-mode -1)
    (menu-bar-mode -1)
@@ -49,21 +49,21 @@
          )
    #+END_SRC
 ** IDO
-   #+BEGIN_SRC elisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq ido-enable-flex-matching t)
      (setq ido-everywhere t)
      (ido-mode 1)
    #+END_SRC
 ** Yasnippet
-   #+BEGIN_SRC elisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (yas-global-mode 1)
    #+END_SRC
 ** Jumping around
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 #+END_SRC
 ** Other
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   ;;-- Set default browser
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "chromium")
@@ -79,7 +79,7 @@
 #+END_SRC
 * Code
 ** Paren Control
-  #+BEGIN_SRC elisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Paren Matching
     (require 'paren)
     (setq show-paren-style 'parenthesis)
@@ -89,24 +89,24 @@
   #+END_SRC
    
 ** Ocaml
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   (setq auto-mode-alist
         (append '(("\\.ml[ily]?$" . tuareg-mode)
                   ("\\.topml$" . tuareg-mode))
                 auto-mode-alist))
 #+END_SRC
 ** C
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 #+END_SRC
 ** Python
-   #+BEGIN_SRC elisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (require `nose)
      ;; EIN (Ipython notebook)
      (defalias 'python-indent-line-function 'python-indent-line)
    #+END_SRC
 ** Lisp Like
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   ;;---- Common Lisp
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
   ;; Replace "sbcl" with the path to your implementation
@@ -121,7 +121,7 @@
     
 #+END_SRC
 ** Org Mode
-   #+BEGIN_SRC elisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (require 'org-latex)
      (setq org-agenda-files (quote ("~/org/agenda.org" "~/org/schedule.org")))
      (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -150,7 +150,7 @@
      
    #+END_SRC
 ** Bitlbee
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitlbee ()
     "Connect to IM networks using bitlbee."
     (interactive)
