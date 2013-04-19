@@ -6,3 +6,4 @@ emacs.d/eshell/*
 emacs.d/request/*
 emacs.d/tramp
 emacs.d/setup.el
+emacs.d/abbrev_defs
