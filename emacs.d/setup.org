@@ -15,11 +15,13 @@
 * General
 ** Packages
    #+BEGIN_SRC emacs-lisp :tangle yes :export code
-   (require 'package)
-   (package-initialize)
-   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                            ("marmalade" . "http://marmalade-repo.org/packages/")
-                            ("melpa" . "http://melpa.milkbox.net/packages/")))
+     (require 'package)
+     (package-initialize)
+     (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                              ("marmalade" . "http://marmalade-repo.org/packages/")
+                              ("melpa" . "http://melpa.milkbox.net/packages/")
+                              ("org" . "http://orgmode.org/elpa/")))
+     
    #+END_SRC
 ** UI
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -33,6 +35,8 @@
    (size-indication-mode t)
    (fset 'yes-or-no-p 'y-or-n-p)
    (load-theme 'zenburn t)
+
+   (add-to-list 'default-frame-alist '(font . "Inconsolata-11"))
    (set-default-font "Inconsolata-11")
    ;;-- Death to tabs!
    (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
@@ -99,26 +103,41 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
   (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 #+END_SRC
+** Arudino
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (add-to-list 'auto-mode-alist '("\\.ino" . c-mode))
+   #+END_SRC
 ** Python
    #+BEGIN_SRC emacs-lisp :tangle yes
      (require `nose)
      ;; EIN (Ipython notebook)
      (defalias 'python-indent-line-function 'python-indent-line)
+     ;; Make ipython the python shell
+     (setq
+      python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--pylab"
+      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+      python-shell-completion-setup-code
+        "from IPython.core.completerlib import module_completion"
+      python-shell-completion-module-string-code
+        "';'.join(module_completion('''%s'''))\n"
+      python-shell-completion-string-code
+        "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
    #+END_SRC
 ** Lisp Like
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ;;---- Common Lisp
-  (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
-  ;;---- Paredit
+  ;; Turn on paraedit
   (autoload 'paredit-mode "paredit"
     "Minor mode for pseudo-structurally editing Lisp code." t)
   (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
   (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-  (add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
-    
+  ;; Turn on el doc
+  (autoload 'turn-on-eldoc-mode "eldoc" nil t)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 ** Org Mode
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -133,10 +152,10 @@
      (define-key global-map "\C-cl" 'org-store-link)
      (define-key global-map "\C-ca" 'org-agenda)
      ;;-- Synatx Highlighting for Code
-     (setq org-export-latex-listings 'minted)
-     (add-to-list 'org-export-latex-packages-alist '("" "minted"))
-     (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
-     (setq org-src-fontify-natively t)
+     ;;(setq org-export-latex-listings 'minted)
+     ;;(add-to-list 'org-export-latex-packages-alist '("" "minted"))
+     ;;(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+     ;;(setq org-src-fontify-natively t)
      ;;-- Blogging
      (setq org2blog/wp-blog-alist
            '(("wordpress"

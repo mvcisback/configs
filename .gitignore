@@ -5,5 +5,3 @@ emacs.d/url/*
 emacs.d/eshell/*
 emacs.d/request/*
 emacs.d/tramp
-emacs.d/init.el
-emacs.d/init.elisp
