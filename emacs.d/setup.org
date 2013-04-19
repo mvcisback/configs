@@ -14,7 +14,7 @@
 #+XSLT:
 * General
 ** Packages
-   #+BEGIN_SRC emacs-lisp :tangle yes :export code
+   #+BEGIN_SRC emacs-lisp  :export code
      (require 'package)
      (package-initialize)
      (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -23,7 +23,7 @@
      
    #+END_SRC
 ** UI
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
    (setq inhibit-startup-screen t)
    (scroll-bar-mode -1)
    (menu-bar-mode -1)
@@ -42,7 +42,7 @@
    (setq-default tab-width 8)            ;; but maintain correct appearance
    #+END_SRC
 ** Backups
-   #+BEGIN_SRC :tangle yes
+   #+BEGIN_SRC 
    (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
          backup-by-copying t    ; Don't delink hardlinks
          version-control t      ; Use version numbers on backups
@@ -52,21 +52,21 @@
          )
    #+END_SRC
 ** IDO
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
      (setq ido-enable-flex-matching t)
      (setq ido-everywhere t)
      (ido-mode 1)
    #+END_SRC
 ** Yasnippet
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
      (yas-global-mode 1)
    #+END_SRC
 ** Jumping around
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp 
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 #+END_SRC
 ** Other
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp 
   ;;-- Set default browser
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "chromium")
@@ -82,7 +82,7 @@
 #+END_SRC
 * Code
 ** Paren Control
-  #+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp 
     ;; Paren Matching
     (require 'paren)
     (setq show-paren-style 'parenthesis)
@@ -92,22 +92,22 @@
   #+END_SRC
    
 ** Ocaml
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp 
   (setq auto-mode-alist
         (append '(("\\.ml[ily]?$" . tuareg-mode)
                   ("\\.topml$" . tuareg-mode))
                 auto-mode-alist))
 #+END_SRC
 ** C
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp 
   (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 #+END_SRC
 ** Arudino
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
    (add-to-list 'auto-mode-alist '("\\.ino" . c-mode))
    #+END_SRC
 ** Python
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
      (require `nose)
      ;; EIN (Ipython notebook)
      (defalias 'python-indent-line-function 'python-indent-line)
@@ -125,7 +125,7 @@
         "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
    #+END_SRC
 ** Lisp Like
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp 
   ;; Turn on paraedit
   (autoload 'paredit-mode "paredit"
     "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -139,7 +139,7 @@
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 ** Org Mode
-   #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp 
      (setq org-agenda-files (quote ("~/org/agenda.org" "~/org/schedule.org")))
      ;;-- Standard key bindings
      (global-set-key "\C-cl" 'org-store-link)
@@ -163,7 +163,7 @@
         (python . t)))
    #+END_SRC
 ** Bitlbee
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun bitlbee ()
     "Connect to IM networks using bitlbee."
     (interactive)
