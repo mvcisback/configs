@@ -1,9 +1,0 @@
-emacs.d/auto-save-list/*
-emacs.d/backup/*
-emacs.d/elpa/*
-emacs.d/url/*
-emacs.d/eshell/*
-emacs.d/request/*
-emacs.d/tramp
-emacs.d/setup.el
-emacs.d/abbrev_defs
