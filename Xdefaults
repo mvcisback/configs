@@ -1,0 +1,105 @@
+/* XFT */
+Xft*dpi: 96
+Xft*antialias: true
+
+/* XTerm */
+XTerm*class: UXTerm
+XTerm*utf8: 1
+
+XTerm*faceSize: 9
+XTerm*faceName: Monospace
+
+XTerm*background: black
+XTerm*foreground: #CCCCCC
+
+XTerm*termName: xterm-256color
+
+XTerm*eightBitInput: false
+XTerm*eightBitOutput: true
+XTerm*eightBitControl: false
+
+XTerm*color0: #2E3436
+XTerm*color1: #CC0000
+XTerm*color2: #4E9A06
+XTerm*color3: #C4A000
+XTerm*color4: #3465A4
+XTerm*color5: #75507B
+XTerm*color6: #06989A
+XTerm*color7: #D3D7CF
+XTerm*color8: #555753
+XTerm*color9: #EF2929
+XTerm*color10: #8AE234
+XTerm*color11: #FCE94F
+XTerm*color12: #729FCF
+XTerm*color13: #AD7FA8
+XTerm*color14: #34E2E2
+XTerm*color15: #EEEEEC
+
+XTerm*toolBar: false
+
+/* UXTerm */
+UXTerm*faceSize: 9
+UXTerm*faceName: Monospace
+
+UXTerm*background: black
+UXTerm*foreground: #CCCCCC
+
+UXTerm*termName: xterm-256color
+
+UXTerm*eightBitInput: false
+UXTerm*eightBitOutput: true
+UXTerm*eightBitControl: false
+
+UXTerm*color0: #2E3436
+UXTerm*color1: #CC0000
+UXTerm*color2: #4E9A06
+UXTerm*color3: #C4A000
+UXTerm*color4: #3465A4
+UXTerm*color5: #75507B
+UXTerm*color6: #06989A
+UXTerm*color7: #D3D7CF
+UXTerm*color8: #555753
+UXTerm*color9: #EF2929
+UXTerm*color10: #8AE234
+UXTerm*color11: #FCE94F
+UXTerm*color12: #729FCF
+UXTerm*color13: #AD7FA8
+UXTerm*color14: #34E2E2
+UXTerm*color15: #EEEEEC
+
+UXTerm*toolBar: false
+
+/* URxvt */
+URxvt*font: xft:Monospace-9
+
+URxvt*background: black
+URxvt*foreground: #CCCCCC
+URxvt*scrollBar: false
+
+URxvt*termName: rxvt-unicode
+
+URxvt*color0:      #000000
+URxvt*color1:      #9e1828
+URxvt*color2:      #aece92
+URxvt*color3:      #968a38
+URxvt*color4:      #414171
+URxvt*color5:      #963c59
+URxvt*color6:      #418179
+URxvt*color7:      #bebebe
+URxvt*color8:      #666666
+URxvt*color9:      #cf6171
+URxvt*color10:     #c5f779
+URxvt*color11:     #fff796
+URxvt*color12:     #4186be
+URxvt*color13:     #cf9ebe
+URxvt*color14:     #71bebe
+URxvt*color15:     #ffffff
+
+/* Rxvt */
+Rxvt*termName: rxvt
+
+/* Aterm */
+Aterm*termName: aterm
+
+/* pterm */
+pterm.TerminalType: putty-256color
