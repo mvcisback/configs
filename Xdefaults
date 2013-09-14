@@ -70,7 +70,7 @@ UXTerm*color15: #EEEEEC
 UXTerm*toolBar: false
 
 /* URxvt */
-URxvt*font: xft:Monospace-9
+URxvt*font: xft:Inconsolata-10
 
 URxvt*background: black
 URxvt*foreground: #CCCCCC
