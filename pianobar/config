@@ -1,0 +1,2 @@
+user = mvc@linux.com
+password_command = gpg --decrypt ~/.password-store/pandora.com.gpg
