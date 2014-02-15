@@ -7,7 +7,7 @@ emacs --daemon &
 # wallpaper
 feh --bg-scale $WALLPAPER &
 # gpg agent
-eval $(gpg-agent --daemon) &
+eval $(gpg-agent --daemon --enable-ssh-support --pinentry-program $PINENTRY) &
 # pulse
 pulseaudio --start &
 # Terminal daemon
