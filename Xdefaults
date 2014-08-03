@@ -1,5 +1,4 @@
-/* XFT */
-Xft*dpi: 96
+ /* XFT */
 Xft*antialias: true
 
 /* XTerm */
@@ -103,3 +102,5 @@ Aterm*termName: aterm
 
 /* pterm */
 pterm.TerminalType: putty-256color
+
+Xft.dpi: 150

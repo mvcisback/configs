@@ -11,6 +11,7 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Layout.NoBorders    
+import XMonad.Hooks.ManageHelpers (doFullFloat)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -65,6 +66,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm .|. shiftMask , xK_p     ), spawn "passmenu")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -209,10 +211,13 @@ myLayout = tiled ||| Mirror tiled ||| noBorders Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =?"MPlayer" --> doFloat
+    , className =?"Gimp" --> doFloat
+    , resource  =?"desktop_window" --> doIgnore
+    , resource  =?"kdesktop" --> doIgnore
+    , className =?"Steam" --> doFloat
+    , className =?"steam" --> doFullFloat
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
