@@ -12,5 +12,6 @@ eval $(gpg-agent --daemon --enable-ssh-support --pinentry-program $PINENTRY) &
 pulseaudio --start &
 # Terminal daemon
 urxvtd &
+dunst&
 # start xmonad
 exec xmonad
