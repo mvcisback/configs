@@ -11,7 +11,9 @@ eval $(gpg-agent --daemon --enable-ssh-support --pinentry-program $PINENTRY) &
 # pulse
 pulseaudio --start &
 # Terminal daemon
-urxvtd &
 dunst&
+xrdb ~/.Xresources &
+# Terminfo
+export TERMINFO=~/.terminfo
 # start xmonad
 exec xmonad
