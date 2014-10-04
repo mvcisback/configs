@@ -50,3 +50,4 @@ missing
 config.h.in
 
 *.egg-info
+.ipynb_checkpoints/*
