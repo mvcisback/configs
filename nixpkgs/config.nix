@@ -18,6 +18,7 @@ pkgs: {
         pass
         gnupg
         xclip
+        slock
         (import ./rawdog.nix)
       ];
     };
