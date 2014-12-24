@@ -51,7 +51,7 @@
     uid = 1000;
     home = "/home/mvc";
     extraGroups = [ "wheel" ];
-    shell = "fish";
+    useDefaultShell = true;
     createHome = true;
   };
 
