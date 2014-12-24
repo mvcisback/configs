@@ -33,6 +33,7 @@
      wget
      git
      fish
+     i3lock
   ];
 
   # Enable CUPS to print documents.

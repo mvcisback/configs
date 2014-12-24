@@ -17,7 +17,6 @@ pkgs: {
         pass
         gnupg
         xclip
-        slock
         pulseaudio
         pavucontrol
         feh
