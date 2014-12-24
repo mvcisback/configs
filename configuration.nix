@@ -30,6 +30,7 @@
   environment.systemPackages = with pkgs; [
      wget
      git
+     fish
   ];
 
   # Enable CUPS to print documents.
@@ -50,7 +51,7 @@
     uid = 1000;
     home = "/home/mvc";
     extraGroups = [ "wheel" ];
-    useDefaultShell = true;
+    shell = "fish";
     createHome = true;
   };
 
