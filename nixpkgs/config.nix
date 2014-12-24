@@ -12,13 +12,15 @@ pkgs: {
         taskwarrior
         aspell
         fish
-        pulseaudio
         pinentry
         rxvt_unicode
         pass
         gnupg
         xclip
         slock
+        pulseaudio
+        pavucontrol
+        feh
         (import ./rawdog.nix)
       ];
     };

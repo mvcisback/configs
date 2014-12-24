@@ -21,7 +21,8 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal :: String
-myTerminal = "st -e tmux attach || st -e tmux"
+-- myTerminal = "st -e tmux attach || st -e tmux"
+myTerminal = "urxvt"
 
 newTerminal :: String
 newTerminal = "st -e tmux"

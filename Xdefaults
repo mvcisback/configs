@@ -69,7 +69,7 @@ UXTerm*color15: #EEEEEC
 UXTerm*toolBar: false
 
 /* URxvt */
-URxvt*font: xft:Inconsolata-10
+URxvt*font: xft:Inconsolata-8
 
 URxvt*background: black
 URxvt*foreground: #CCCCCC
@@ -103,4 +103,3 @@ Aterm*termName: aterm
 /* pterm */
 pterm.TerminalType: putty-256color
 
-Xft.dpi: 150

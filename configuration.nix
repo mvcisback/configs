@@ -15,6 +15,8 @@
   networking.hostName = "nano"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  hardware.pulseaudio.enable = true;
+  
   # internationalisation properties.
   i18n = {
     consoleFont = "lat9w-16";
@@ -51,7 +53,7 @@
     uid = 1000;
     home = "/home/mvc";
     extraGroups = [ "wheel" ];
-    useDefaultShell = true;
+    shell = "/run/current-system/sw/bin/zsh";
     createHome = true;
   };
 
