@@ -22,6 +22,8 @@ pkgs: {
         pavucontrol
         feh
         imagemagick
+        haskellPackages.yi
+        haskellPackages.pandoc
         (import ./rawdog.nix)
       ];
     };
