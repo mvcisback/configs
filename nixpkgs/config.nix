@@ -21,11 +21,9 @@ pkgs: {
         pulseaudio
         pavucontrol
         feh
+        imagemagick
         (import ./rawdog.nix)
       ];
     };
   };
-
-
-
 }

@@ -53,7 +53,7 @@
     uid = 1000;
     home = "/home/mvc";
     extraGroups = [ "wheel" ];
-    shell = "/run/current-system/sw/bin/zsh";
+    shell = "/run/current-system/sw/bin/fish";
     createHome = true;
   };
 
