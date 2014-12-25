@@ -44,10 +44,17 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "ctrl:nocaps";
 
-  # Enable the KDE Desktop Environment.
+  # Enable Slim
+  services.xserver.displayManager.slim.enable = true;
+  services.xserver.displayManager.slim.theme = pkgs.fetchurl {
+    url = "http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/s/sl/slim.berlios/slim-subway.tar.gz";
+    sha256 = "0205568e3e157973b113a83b26d8829ce9962a85ef7eb8a33d3ae2f3f9292253";
+  };
+  
+  # Enable Xmonad
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.mvc = {
     isNormalUser = true;

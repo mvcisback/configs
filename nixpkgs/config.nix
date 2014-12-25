@@ -23,6 +23,7 @@ pkgs: {
         imagemagick
         haskellPackages.yi
         haskellPackages.pandoc
+        tmux
         (import ./rawdog.nix)
       ];
     };
