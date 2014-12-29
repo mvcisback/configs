@@ -24,6 +24,11 @@ pkgs: {
         haskellPackages.yi
         haskellPackages.pandoc
         tmux
+        keybase-node-client
+        unzip
+        haskellPackages.cabal2nix
+        haskellPackages.cabal
+        haskellPackages.ghc
         (import ./rawdog.nix)
       ];
     };
