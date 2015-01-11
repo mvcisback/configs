@@ -14,6 +14,7 @@
 
   networking.hostName = "nano"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wicd.enable = true; # ugh...I wan't netctl
 
   hardware.pulseaudio.enable = true;
   
@@ -38,6 +39,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.locate.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -50,18 +52,24 @@
     url = "http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/s/sl/slim.berlios/slim-subway.tar.gz";
     sha256 = "0205568e3e157973b113a83b26d8829ce9962a85ef7eb8a33d3ae2f3f9292253";
   };
+  services.xserver.desktopManager.xterm.enable = false;
   
   # Enable Xmonad
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
+
+  services.xserver.startGnuPGAgent = true;
+
+  programs.ssh.startAgent = false;
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.extraUsers.mvc = {
     isNormalUser = true;
     uid = 1000;
     home = "/home/mvc";
     extraGroups = [ "wheel" ];
-    shell = "/run/current-system/sw/bin/fish";
+    shell = "${pkgs.fish}/bin/fish";
     createHome = true;
   };
 
