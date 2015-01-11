@@ -57,10 +57,10 @@
   # Enable Xmonad
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-
   services.xserver.startGnuPGAgent = true;
 
   programs.ssh.startAgent = false;
+  services.xserver.windowManager.default = "xmonad";  
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
