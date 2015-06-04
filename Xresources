@@ -86,3 +86,4 @@ URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: xrdb /home/mvc/.Xresources
 URxvt.matcher.button: 3
 
+Xft.dpi: 125

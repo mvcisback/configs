@@ -39,7 +39,7 @@
 	pager =
 	excludesfile = ~/.gitignore
 	safecrlf = true
-	editor = yi
+	editor = emacs
 [push]
 	default = matching
 [user]

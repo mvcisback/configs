@@ -21,10 +21,10 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal :: String
-myTerminal = "urxvt"
+myTerminal = "urxvt -e tmux attach || urxvt -e tmux"
 
 newTerminal :: String
-newTerminal = "urxvt"
+newTerminal = "urxvt -e tmux"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -82,6 +82,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), spawn "dmenu_run")
     , ((modm .|. shiftMask , xK_p     ), spawn "passmenu")
 
+    -- launch emacs
+    , ((modm .|. shiftMask, xK_o), spawn "emacsclient -c")
+      
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 

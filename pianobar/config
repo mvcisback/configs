@@ -1,2 +1,2 @@
 user = mvc@linux.com
-password_command = gpg --decrypt ~/.password-store/media/pandora.com.gpg
+password_command = pass media/pandora.com

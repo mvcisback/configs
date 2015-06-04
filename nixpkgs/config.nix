@@ -1,35 +1,53 @@
 pkgs: {
+  allowUnfree = true;
+
+  firefox = {
+    enableGoogleTalkPlugin = true;
+    enableAdobeFlash = true;
+  };
+    
   packageOverrides = self : rec {
+
+    env = self.haskellngPackages.ghcWithPackages (p: with p; [
+      Agda
+      yi
+    ]);
+    
     userPkgs = self.buildEnv {
       name = "userPkgs";
       paths = with self; [
-        firefox
-        emacs
-        dunst
-        mpv
-        weechat
-        dmenu
-        taskwarrior
         aspell
+        aspellDicts.en
+        dmenu
+        dunst
+        emacs
+        env
+        ffmpeg
+        firefox-bin
         fish
-        pinentry
-        rxvt_unicode
-        pass
+        git
         gnupg
-        xclip
-        pulseaudio
-        pavucontrol
-        feh
+        i3lock
+        ii
         imagemagick
-        haskellPackages.yi
-        haskellPackages.pandoc
+        inconsolata
+        mpv
+        mupdf
+        p7zip
+        pass
+        pavucontrol
+        pianobar
+        pv
+        rawdog
+        rtorrent
+        rxvt_unicode
+        taskwarrior
         tmux
-        keybase-node-client
         unzip
-        haskellPackages.cabal2nix
-        haskellPackages.cabal
-        haskellPackages.ghc
-        (import ./rawdog.nix)
+        weechat
+        wget
+        xclip
+        zip
       ];
     };
   };
