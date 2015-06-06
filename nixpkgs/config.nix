@@ -18,12 +18,13 @@ pkgs: {
       paths = with self; [
         aspell
         aspellDicts.en
+        chromium
         dmenu
         dunst
         emacs
         env
         ffmpeg
-        firefox-bin
+        firefoxWrapper
         fish
         git
         gnupg
@@ -47,6 +48,8 @@ pkgs: {
         weechat
         wget
         xclip
+        yubikey-personalization
+        yubikey-personalization-gui        
         zip
       ];
     };

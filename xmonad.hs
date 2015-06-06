@@ -26,6 +26,9 @@ myTerminal = "urxvt -e tmux attach || urxvt -e tmux"
 newTerminal :: String
 newTerminal = "urxvt -e tmux"
 
+editor :: String
+editor = "emacsclient -c -a"
+
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -83,7 +86,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask , xK_p     ), spawn "passmenu")
 
     -- launch emacs
-    , ((modm .|. shiftMask, xK_o), spawn "emacsclient -c")
+    , ((modm .|. shiftMask, xK_o), spawn "emacsclient -c -a ''")
       
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)

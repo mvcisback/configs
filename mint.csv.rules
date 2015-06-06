@@ -1,0 +1,8 @@
+# skip headings
+skip 1
+
+#mint.com: "Date","Description","Original Description","Amount","Transaction Type","Category","Account Name","Labels","Notes"
+fields date, description, comment, amount, type, category, accountName, labels, notes
+
+currency $
+account1 assets:bank:checking
