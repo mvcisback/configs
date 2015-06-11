@@ -1,35 +1,28 @@
-pkgs: {
+pkgs: rec {
   allowUnfree = true;
-
+  allowBroken = true;
+    
   firefox = {
     enableGoogleTalkPlugin = true;
     enableAdobeFlash = true;
   };
-    
+        
   packageOverrides = self : rec {
-
-    env = self.haskellngPackages.ghcWithPackages (p: with p; [
-      Agda
-      yi
-    ]);
     
     userPkgs = self.buildEnv {
       name = "userPkgs";
       paths = with self; [
         aspell
         aspellDicts.en
-        chromium
         dmenu
         dunst
         emacs
-        env
         ffmpeg
         firefoxWrapper
         fish
         git
         gnupg
         i3lock
-        ii
         imagemagick
         inconsolata
         mpv
@@ -39,7 +32,6 @@ pkgs: {
         pavucontrol
         pianobar
         pv
-        rawdog
         rtorrent
         rxvt_unicode
         taskwarrior
@@ -48,8 +40,6 @@ pkgs: {
         weechat
         wget
         xclip
-        yubikey-personalization
-        yubikey-personalization-gui        
         zip
       ];
     };
