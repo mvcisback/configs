@@ -1,4 +1,9 @@
-pkgs: rec {
+{ pkgs }:
+
+with pkgs;
+let
+
+in rec {
   allowUnfree = true;
   allowBroken = true;
     
@@ -6,14 +11,14 @@ pkgs: rec {
     enableGoogleTalkPlugin = true;
     enableAdobeFlash = true;
   };
-        
-  packageOverrides = self : rec {
-    
+
+  packageOverrides = self : rec {    
     userPkgs = self.buildEnv {
       name = "userPkgs";
       paths = with self; [
         aspell
         aspellDicts.en
+        autojump
         dmenu
         dunst
         emacs
@@ -31,11 +36,13 @@ pkgs: rec {
         pass
         pavucontrol
         pianobar
+        pwgen
         pv
         rtorrent
         rxvt_unicode
         taskwarrior
         tmux
+        tmuxinator
         unzip
         weechat
         wget

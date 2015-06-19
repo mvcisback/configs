@@ -21,10 +21,10 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal :: String
-myTerminal = "urxvt -e tmux attach || urxvt -e tmux"
+myTerminal = "urxvt -e tmux attach || urxvt -e mux default"
 
 newTerminal :: String
-newTerminal = "urxvt -e tmux"
+newTerminal = "urxvt"
 
 editor :: String
 editor = "emacsclient -c -a"
