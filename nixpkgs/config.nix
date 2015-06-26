@@ -38,11 +38,15 @@ in rec {
         pianobar
         pwgen
         pv
+        remind
+        rofi
         rtorrent
         rxvt_unicode
+        steam
         taskwarrior
         tmux
         tmuxinator
+        todo-txt-cli
         unzip
         weechat
         wget
