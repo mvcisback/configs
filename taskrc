@@ -1,7 +1,7 @@
-# [Created by task 2.3.0 6/4/2014 02:20:07]
+# [Created by task 2.4.0 6/5/2015 19:39:02]
 # Taskwarrior program configuration file.
-# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-faq',
-# 'man task-tutorial', 'man task-color', 'man task-sync' or 'man taskrc'
+# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
 
 # Here is an example of entries that use the default, override and blank values
 #   variable=foo   -- By specifying a value, this overrides the default
@@ -13,21 +13,53 @@
 # Files
 data.location=~/.task
 
-# Color theme (uncomment one to use)
-#include /usr/share/doc/task/rc/light-16.theme
-#include /usr/share/doc/task/rc/light-256.theme
-#include /usr/share/doc/task/rc/dark-16.theme
-#include /usr/share/doc/task/rc/dark-256.theme
-#include /usr/share/doc/task/rc/dark-red-256.theme
-#include /usr/share/doc/task/rc/dark-green-256.theme
-#include /usr/share/doc/task/rc/dark-blue-256.theme
-#include /usr/share/doc/task/rc/dark-violets-256.theme
-#include /usr/share/doc/task/rc/dark-yellow-green.theme
-#include /usr/share/doc/task/rc/dark-gray-256.theme
-
 taskd.server=taskwarrior.inthe.am:53589
 taskd.credentials=inthe_am/mvcisback/367604cc-43d8-4483-9ded-67b3169af52f
-taskd.certificate=\/home\/mvc\/.task\/client.pem
-taskd.ca=\/home\/mvc\/.task\/ca.pem
-taskd.key=\/home\/mvc\/.task\/client.key.pem
 taskd.trust=ignore hostname
+
+include /home/mvc/.nix-profile/share/doc/task/rc/solarized-dark-256.theme
+
+
+taskd.certificate=/home/mvc/.task/client.pem
+taskd.key=/home/mvc/.task/client.key.pem
+taskd.ca=/home/mvc/.task/ca.pem
+context.mom=+mom
+context.moving=project:moving or project:berkeley_apt or project:berkeley
+context.study=+learn or +research
+context.movies=project:movie_queue
+context.default=project.not:weekly_review and project.not:yearly_review
+context.hott=project:proof_theory or project:type_theory
+context.pit=+pit or project:pit_apt
+
+# Manual Priority overrides
+urgency.uda.priority.H.coefficient=10
+urgency.uda.priority.L.coefficient=-1
+# regex=on
+uda.priority.values=H,,L
+
+
+# Other urgency coefficients
+urgency.next.coefficient=15.0                   # +next tag
+urgency.due.coefficient=12.0                    # overdue or near due date
+urgency.blocking.coefficient=8.0                # blocking other tasks
+urgency.priority.coefficient=6.0                # priority
+urgency.active.coefficient=4.0                  # already started tasks
+urgency.scheduled.coefficient=0               # scheduled tasks
+urgency.age.coefficient=1.0                     # Urgency coefficient for age
+urgency.annotations.coefficient=0             # has annotations
+urgency.tags.coefficient=0                    # has tags
+urgency.project.coefficient=0                 # assigned to any project
+urgency.blocked.coefficient=-5.0                # blocked by other tasks
+urgency.waiting.coefficient=-3.0                # waiting task
+urgency.user.project.<project>.coefficient=5.0  # specific project
+# urgency.user.tag.<tag>.coefficient=5.0          # specific tag
+# urgency.uda.<name>.coefficient=5.0              # specific UDA
+
+verbose=no
+
+# default.command=next
+#task.report.list.labels=ID,Active,D,P,Tags,Sch,Due,Until,Description
+#report.list.columns=id,start.age,depends.indicator,priority,tags,scheduled.countdown,due,until.remaining,description.count
+
+report.next.labels=ID,Description,Active,Deps,Tag,S,P,Due,Until
+report.next.columns=id,description,start.age,depends,tags,scheduled.countdown,priority,due.remaining,until.remaining

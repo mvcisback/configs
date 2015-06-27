@@ -38,7 +38,6 @@ in rec {
         pianobar
         pwgen
         pv
-        remind
         rofi
         rtorrent
         rxvt_unicode
@@ -46,11 +45,11 @@ in rec {
         taskwarrior
         tmux
         tmuxinator
-        todo-txt-cli
         unzip
         weechat
         wget
         xclip
+        xcompmgr
         zip
       ];
     };
