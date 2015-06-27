@@ -6,15 +6,36 @@ let
 in rec {
   allowUnfree = true;
   allowBroken = true;
-    
+
   firefox = {
     enableGoogleTalkPlugin = true;
     enableAdobeFlash = true;
   };
 
-  packageOverrides = self : rec {    
-    userPkgs = self.buildEnv {
-      name = "userPkgs";
+  packageOverrides = self : rec {
+
+    graphical = self.buildEnv {
+      name = "graphicalPkgs";
+      paths = with self; [
+        firefoxWrapper
+        i3lock
+        mpv
+        rofi
+        steam
+        xcompmgr
+      ];
+    };
+
+    audio = self.buildEnv {
+        name = "audioPkgs";
+        paths = with self; [
+          pavucontrol
+          pianobar
+        ];
+    };
+
+    general = self.buildEnv {
+      name = "generalPkgs";
       paths = with self; [
         aspell
         aspellDicts.en
@@ -23,25 +44,19 @@ in rec {
         dunst
         emacs
         ffmpeg
-        firefoxWrapper
         fish
         git
         gnupg
-        i3lock
         imagemagick
         inconsolata
-        mpv
+        mosh
         mupdf
         p7zip
         pass
-        pavucontrol
-        pianobar
         pwgen
         pv
-        rofi
         rtorrent
         rxvt_unicode
-        steam
         taskwarrior
         tmux
         tmuxinator
@@ -49,9 +64,25 @@ in rec {
         weechat
         wget
         xclip
-        xcompmgr
         zip
       ];
     };
+
+    desktopPkgs = self.buildEnv {
+      name = "desktopPkgs";
+      paths = with self; [
+        audio
+        general
+        graphical
+      ];
+    };
+
+    remotePkgs = self.buildEnv {
+      name = "remotePkgs";
+      paths = with self; [
+        general
+      ];
+    };
+
   };
 }
