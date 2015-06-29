@@ -81,6 +81,7 @@ in rec {
       name = "remotePkgs";
       paths = with self; [
         general
+        nix
       ];
     };
 
