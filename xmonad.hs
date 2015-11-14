@@ -1,18 +1,15 @@
 import XMonad
-import Data.Monoid
+import XMonad.Config.Gnome
+import XMonad.Hooks.SetWMName
 import System.Exit
-import XMonad.Layout.NoBorders (noBorders, WithBorder)
-import XMonad.Layout.LayoutModifier
-import XMonad.Hooks.ManageHelpers (doFullFloat)
-
-import qualified XMonad.StackSet as W
 import qualified Data.Map as M
+import qualified XMonad.StackSet as W
 
 myTerminal :: String
-myTerminal = "urxvtc -e tmux -2 attach"
+myTerminal = "urxvtcd -e tmux -2 attach"
 
 newTerminal :: String
-newTerminal = "urxvtc"
+newTerminal = "urxvtcd"
 
 editor :: String
 editor = "emacsclient -c -a ''"
@@ -24,17 +21,6 @@ myBorderWidth = 5
 myModMask :: KeyMask
 myModMask = mod4Mask
 
-myWorkspaces :: [String]
-myWorkspaces = ["web", "irc", "code"] ++ map show [4..9]
-
--- Border colors for unfocused and focused windows, respectively.
-myNormalBorderColor :: String
-myNormalBorderColor  = "#657B83"
-
-myFocusedBorderColor :: String
-myFocusedBorderColor = "#859900"
-
-------------------------------------------------------------------------
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -43,7 +29,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask .|. controlMask , xK_Return), spawn $ newTerminal)
 
     -- launch dmenu
-    , ((modm, xK_p), spawn "rofi -show run -font 'snap 10'")
+    , ((modm, xK_p), spawn "dmenu_run")
     , ((modm .|. shiftMask , xK_p), spawn "passmenu")
 
     -- lock screen
@@ -125,91 +111,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-
-------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
-myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-    ]
-
-------------------------------------------------------------------------
--- Layouts:
-myLayout :: Choose Tall (Choose (Mirror Tall) (ModifiedLayout WithBorder Full)) Window
-myLayout = tiled ||| Mirror tiled ||| noBorders Full
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio = 1/2
-
-     -- Percent of screen to increment by when resizing panes
-     delta = 3/100
-
-------------------------------------------------------------------------
--- Window rules:
-
-myManageHook :: Query (Endo WindowSet)
-myManageHook = composeAll []
-
-------------------------------------------------------------------------
--- Event handling
-
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
-myEventHook :: Event -> X All
-myEventHook = mempty
-
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
-myLogHook :: X ()
-myLogHook = return ()
-
-------------------------------------------------------------------------
-defaults :: XConfig (Choose Tall (Choose (Mirror Tall) (ModifiedLayout WithBorder Full)))
-defaults = defaultConfig {
-        terminal = myTerminal,
-        focusFollowsMouse = False,
-        clickJustFocuses = False,
-        borderWidth = myBorderWidth,
-        modMask = myModMask,
-        workspaces = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-
-      -- key bindings
-        keys = myKeys,
-        mouseBindings = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook = myLayout,
-        manageHook = myManageHook,
-        handleEventHook = myEventHook,
-        logHook = myLogHook,
-        startupHook = spawn "~/.xmonad/hooks/startup"
-    }
-
-
-main :: IO ()
-main = xmonad defaults
+main = xmonad gnomeConfig {
+       modMask = myModMask,
+       keys = myKeys,
+       terminal = myTerminal,
+       startupHook = startupHook gnomeConfig
+          >> setWMName "LG3D"
+          >> spawn "tmux new-session -d"
+          >> spawn "emacs --daemon"
+     }

@@ -54,3 +54,5 @@ config.h.in
 
 fish/fishd.*
 fish/fish_history
+
+*.pdf

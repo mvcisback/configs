@@ -39,7 +39,7 @@
 	pager =
 	excludesfile = ~/.gitignore
 	safecrlf = true
-	editor = emacs
+	editor = $EDITOR
 [push]
 	default = matching
 [user]
@@ -48,3 +48,7 @@
 
 [merge]
 	tool = emerge
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

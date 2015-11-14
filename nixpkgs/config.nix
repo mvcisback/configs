@@ -7,83 +7,103 @@ in rec {
   allowUnfree = true;
   allowBroken = true;
 
-  firefox = {
-    enableGoogleTalkPlugin = true;
-    enableAdobeFlash = true;
-  };
-
   packageOverrides = self : rec {
 
-    graphical = self.buildEnv {
-      name = "graphicalPkgs";
-      paths = with self; [
-        firefoxWrapper
-        i3lock
-        mpv
-        rofi
-        steam
-        xcompmgr
-      ];
-    };
+  graphical = self.buildEnv {
+    name = "graphicalPkgs";
+    paths = with self; [
+      firefox
+      i3lock
+      mpv
+      rofi
+      steam
+      xcompmgr
+    ];
+  };
 
-    audio = self.buildEnv {
-        name = "audioPkgs";
-        paths = with self; [
-          pavucontrol
-          pianobar
-        ];
-    };
+  email = self.buildEnv {
+    name = "emailPkgs";
+    paths = with self; [
+      python27Packages.alot
+      notmuch
+      isync
+      lynx
+      msmtp
+    ];
+  };
 
-    general = self.buildEnv {
-      name = "generalPkgs";
+  audio = self.buildEnv {
+      name = "audioPkgs";
       paths = with self; [
-        aspell
-        aspellDicts.en
-        autojump
-        dmenu
-        dunst
-        emacs
-        ffmpeg
-        fish
-        git
-        gnupg
-        imagemagick
-        inconsolata
-        mosh
-        mupdf
-        p7zip
-        pass
-        pwgen
-        pv
-        rtorrent
-        rxvt_unicode
-        taskwarrior
-        tmux
-        tmuxinator
-        unzip
-        weechat
-        wget
-        xclip
-        zip
+        pavucontrol
+        pianobar
       ];
-    };
+  };
 
-    desktopPkgs = self.buildEnv {
-      name = "desktopPkgs";
-      paths = with self; [
-        audio
-        general
-        graphical
-      ];
-    };
+  general = self.buildEnv {
+    name = "generalPkgs";
+    paths = with self; [
+      aspell
+      aspellDicts.en
+      autojump
+      dmenu
+      dunst
+      emacs
+      email
+      ffmpeg
+      fish
+      git
+      gnupg
+      imagemagick
+      inconsolata
+      mosh
+      mupdf
+      p7zip
+      pass
+      pciutils
+      pwgen
+      pv
+      rtorrent
+      rxvt_unicode
+      taskwarrior
+      tmux
+      tmuxinator
+      unzip
+      usbutils
+      weechat
+      wget
+      xclip
+      zip
+    ];
+  };
+  
+  desktopPkgs = self.buildEnv {
+    name = "desktopPkgs";
+    paths = with self; [
+      audio
+      general
+      graphical
+    ];
+  };
+  
+  remotePkgs = self.buildEnv {
+    name = "remotePkgs";
+    paths = with self; [
+      general
+      nix
+    ];
+  };
 
-    remotePkgs = self.buildEnv {
-      name = "remotePkgs";
-      paths = with self; [
-        general
-        nix
-      ];
-    };
+  devPkgs = self.buildEnv {
+    name = "devPkgs";
+    paths = with self; [
+      (pkgs.texLiveAggregationFun { paths = [
+       pkgs.texLive
+       pkgs.texLiveExtra
+       pkgs.lmodern
+      ]; })
+    ];
+  };
 
   };
 }
