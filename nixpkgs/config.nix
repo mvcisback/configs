@@ -22,12 +22,12 @@ in rec {
   general = self.buildEnv {
     name = "generalPkgs";
     paths = with self; [
-      aspell
-      aspellDicts.en
+      #aspell
+      #aspellDicts.en
       autojump
       dmenu
       dunst
-      emacs
+      #emacs
       feh
       ffmpeg-full
       fish
@@ -36,8 +36,8 @@ in rec {
       imagemagick
       inconsolata
       mosh
-      mpv
       mupdf
+      nix
       nmap
       p7zip
       pass
@@ -46,11 +46,10 @@ in rec {
       pwgen
       pv
       rtorrent
-      rxvt_unicode
       taskwarrior
-      tmux
       unzip
       usbutils
+      v4l_utils
       weechat
       wget
       xclip
@@ -72,8 +71,12 @@ in rec {
       capnproto
       clang
       gcc-arm-embedded
+      gcc
+      glibc
       graphviz
       minicom
+      xorg.libX11
+      xorg.libXtst
       pandoc
       protobuf
       protobufc
