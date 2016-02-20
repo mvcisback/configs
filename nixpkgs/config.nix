@@ -22,12 +22,12 @@ in rec {
   general = self.buildEnv {
     name = "generalPkgs";
     paths = with self; [
-      #aspell
-      #aspellDicts.en
+      aspell
+      aspellDicts.en
       autojump
       dmenu
       dunst
-      #emacs
+      emacs
       feh
       ffmpeg-full
       fish
@@ -47,11 +47,14 @@ in rec {
       pv
       rtorrent
       taskwarrior
+      tmux
+      tree
       unzip
       usbutils
       v4l_utils
       weechat
       wget
+      xcalib
       xclip
       zip
     ];
@@ -62,26 +65,29 @@ in rec {
     paths = with self; [
       general
       devPkgs
+      rxvt_unicode
+      firefox
+      mpv
+      chromium {
+        enablePepperFlash = true;
+      }
+      xorg.xrandr
+      pavucontrol
+      zathura
+      i3lock
     ];
   };
 
   devPkgs = self.buildEnv {
     name = "devPkgs";
     paths = with self; [
-      capnproto
-      clang
-      gcc-arm-embedded
-      gcc
-      glibc
+      stdenv
       graphviz
+      gnumake
       minicom
-      xorg.libX11
-      xorg.libXtst
       pandoc
-      protobuf
-      protobufc
-      spin
       ttylog
+      texLiveFull
     ];
   };
 };
