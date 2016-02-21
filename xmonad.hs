@@ -6,10 +6,10 @@ import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
 myTerminal :: String
-myTerminal = "urxvtcd -e tmux -2 attach"
+myTerminal = "urxvtc -e tmux -2 attach"
 
 newTerminal :: String
-newTerminal = "urxvtcd"
+newTerminal = "urxvtc"
 
 editor :: String
 editor = "emacsclient -c -a ''"
@@ -119,4 +119,9 @@ main = xmonad gnomeConfig {
           >> setWMName "LG3D"
           >> spawn "tmux new-session -d"
           >> spawn "emacs --daemon"
+          >> spawn "setxkbmap -option ctrl:nocaps"
+          >> spawn "xcompmgr"
+          >> spawn "feh --bg-scale /home/mvc/archive/wallpaper_3.png"
+          >> spawn "/usr/bin/numlockx on"
+          >> spawn "urxvtd"
      }
