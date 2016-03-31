@@ -9,6 +9,12 @@ in rec {
 
   packageOverrides = self : rec {
 
+  pandocEnv = pkgs.haskellPackages.ghcWithPackages (p: with p; [
+    pandoc
+    pandoc-citeproc
+  ]);
+
+  
   email = self.buildEnv {
     name = "emailPkgs";
     paths = with self; [
@@ -75,6 +81,7 @@ in rec {
       pavucontrol
       zathura
       i3lock
+      autorandr
     ];
   };
 
@@ -85,7 +92,7 @@ in rec {
       graphviz
       gnumake
       minicom
-      pandoc
+      pandocEnv
       ttylog
       texLiveFull
     ];

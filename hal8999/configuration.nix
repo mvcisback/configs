@@ -52,10 +52,6 @@
 
   # Enable Slim
   services.xserver.displayManager.slim.enable = true;
-  services.xserver.displayManager.slim.theme = pkgs.fetchurl {
-    url = "http://www.mirrorservice.org/sites/download.sourceforge.net/pub/sourceforge/s/sl/slim.berlios/slim-subway.tar.gz";
-    sha256 = "0205568e3e157973b113a83b26d8829ce9962a85ef7eb8a33d3ae2f3f9292253";
-  };
   services.xserver.desktopManager.xterm.enable = false;
 
   # Enable Xmonad
