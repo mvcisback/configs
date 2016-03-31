@@ -10,14 +10,13 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the gummiboot efi boot loader.
+  # Use the GRUB 2 boot loader.
   boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "hal8999"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "hal0001"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant
 
-  # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
@@ -61,19 +60,15 @@
 
   hardware.pulseaudio.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-
-  nixpkgs.config.allowUnfree = true;  
-  services.unifi.enable = true;
-
   users.extraUsers.mvc = {
     isNormalUser = true;
     uid = 1000;
     home = "/home/mvc";
-    extraGroups = [ "wheel" "vboxusers" ];
-    shell = "/run/current-system/sw/bin/fish";
+    extraGroups = [ "wheel" ];
+    #shell = "/run/current-system/sw/bin/fish";
     createHome = true;
   };
+
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "15.09";
