@@ -22,3 +22,18 @@ Host quassel
 Host hal0001
      HostName 128.32.171.205
      User mvc
+
+Host verifun
+     HostName verifun.eecs.berkeley.edu
+     User mvc
+     IdentityFile ~/.ssh/verifun
+
+Host sauron
+     HostName 192.168.0.12
+     User mvc
+     IdentityFile ~/.ssh/sauron
+
+Host summer_school
+     HostName 192.241.204.248
+     User root
+     IdentityFile ~/.ssh/summer_school

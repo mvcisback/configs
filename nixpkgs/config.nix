@@ -2,11 +2,15 @@
 
 with pkgs;
 let
-
+  stdenv = pkgs.stdenv;
 in rec {
   allowUnfree = true;
   allowBroken = true;
 
+  chromium = {
+     enablePepperFlash = true;
+  };
+  
   packageOverrides = self : rec {
 
   pandocEnv = pkgs.haskellPackages.ghcWithPackages (p: with p; [
@@ -52,8 +56,10 @@ in rec {
       pwgen
       pv
       rtorrent
-      taskwarrior
+      steam
+      dolphinEmuMaster
       tmux
+      todo-txt-cli
       tree
       unzip
       usbutils
@@ -82,6 +88,7 @@ in rec {
       zathura
       i3lock
       autorandr
+      dropbox
     ];
   };
 
@@ -93,8 +100,10 @@ in rec {
       gnumake
       minicom
       pandocEnv
+      texlive.combined.scheme-full
       ttylog
-      texLiveFull
+      python34Packages.virtualenv
+      python34Packages.ipython
     ];
   };
 };

@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -11,7 +7,7 @@
     ];
 
   # Use the gummiboot efi boot loader.
-  boot.loader.gummiboot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "hal8999"; # Define your hostname.
@@ -30,44 +26,53 @@
   environment.systemPackages = with pkgs; [
     wget
     emacs
-    fish
     xmonad-with-packages
   ];
 
   services.openssh.enable = true;
   services.printing.enable = true;
   services.locate.enable = true;
+  services.bitlbee.enable = true;
+  services.bitlbee.plugins = [ pkgs.bitlbee-facebook ];
+  virtualisation.docker.enable = true;
+
+  services.udev.extraRules = ''
+      SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
+  '';
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "ctrl:nocaps";
 
   # Enable Slim
-  services.xserver.displayManager.slim.enable = true;
   services.xserver.desktopManager.xterm.enable = false;
 
   # Enable Xmonad
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-  services.xserver.startGnuPGAgent = true;
 
   programs.ssh.startAgent = false;
   services.xserver.windowManager.default = "xmonad";
 
   hardware.pulseaudio.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
+  # Steam support
+  hardware.bumblebee.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
+  services.xserver.videoDrivers = [ "nvidia" "intel" ];
 
   nixpkgs.config.allowUnfree = true;  
-  services.unifi.enable = true;
 
+  programs.zsh.enable = true;
+  
   users.extraUsers.mvc = {
     isNormalUser = true;
     uid = 1000;
     home = "/home/mvc";
-    extraGroups = [ "wheel" "vboxusers" ];
-    shell = "/run/current-system/sw/bin/fish";
+    extraGroups = [ "wheel" ];
+    shell = "/run/current-system/sw/bin/zsh";
     createHome = true;
   };
 

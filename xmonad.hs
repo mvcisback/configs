@@ -124,4 +124,5 @@ main = xmonad gnomeConfig {
           >> spawn "feh --bg-scale /home/mvc/archive/wallpaper_3.png"
           >> spawn "/usr/bin/numlockx on"
           >> spawn "urxvtd"
+          >> spawn "dropbox-cli start"
      }
