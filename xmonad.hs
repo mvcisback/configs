@@ -121,8 +121,8 @@ main = xmonad gnomeConfig {
           >> spawn "emacs --daemon"
           >> spawn "setxkbmap -option ctrl:nocaps"
           >> spawn "xcompmgr"
-          >> spawn "feh --bg-scale /home/mvc/archive/wallpaper_3.png"
+          >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
           >> spawn "/usr/bin/numlockx on"
           >> spawn "urxvtd"
-          >> spawn "dropbox-cli start"
+          >> spawn "syncthing"
      }

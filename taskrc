@@ -1,12 +1,12 @@
 data.location=~/.task
-include /home/mvc/.nix-profile/share/doc/task/rc/solarized-dark-256.theme
 
-context.office=-home -weekly_meeting
-context.home=-office -weekly_meeting
-context.home2=-office -weekly_meeting -work
-context.omaha=-home -office -weekly_meeting
-context.omaha2=-home -office -weekly_meeting -work
-context.not_home=-home -cooking_society -office -weekly_meeting
+context.office=-home -marissa_house -sri
+context.home=-office -marissa_house -sri
+context.marissa=-home -office -sri
+context.out=-home -office -marissa_house -sri
+context.sri=+sri
+
+include /usr/share/taskwarrior/solarized-dark-256.theme
 
 uda.priority.values=H,,L
 
@@ -30,4 +30,4 @@ report.next.labels=ID,Description,Active,Deps,Tag,S,P,Due,Until
 report.next.columns=id,description,start.age,depends,tags,scheduled.countdown,priority,due.remaining,until.remaining
 
 verbose=no
-context=home
+context=marissa

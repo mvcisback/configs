@@ -2,10 +2,11 @@ Host eecs-repo
     HostName repo.eecs.berkeley.edu
     User repoman
     IdentityFile ~/.ssh/repo_eecs
-    
-Host github.com
-    IdentityFile /home/mvc/.ssh/github
 
+Host github.com
+     HostName github.com
+     IdentityFile ~/.ssh/github
+    
 Host bitbucket.org
      IdentityFile ~/.ssh/bitbucket
      User mvcisback
@@ -13,11 +14,6 @@ Host bitbucket.org
 Host eecs
      HostName login.eecs.berkeley.edu
      User marcell.vc
-
-Host quassel
-     HostName 192.241.227.170
-     IdentityFile ~/.ssh/quassel
-     User root
 
 Host hal0001
      HostName 128.32.171.205
@@ -29,11 +25,10 @@ Host verifun
      IdentityFile ~/.ssh/verifun
 
 Host sauron
-     HostName 192.168.0.12
+     HostName sauron
      User mvc
      IdentityFile ~/.ssh/sauron
 
-Host summer_school
-     HostName 192.241.204.248
-     User root
-     IdentityFile ~/.ssh/summer_school
+Host zero
+     HostName 128.32.171.213
+     User mvc
