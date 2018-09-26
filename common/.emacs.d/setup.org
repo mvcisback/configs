@@ -1,0 +1,145 @@
+#+TITLE:     Marcell Vazquez-Chanlatte's Config file
+#+AUTHOR:    Marcell Vazquez-Chanlatte
+#+EMAIL:     mvc@linux.com
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 num:t toc:4 \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+* General
+** Packages
+   #+BEGIN_SRC emacs-lisp  :export code
+       (require 'package)
+       (package-initialize)
+       (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                                ("marmalade" . "http://marmalade-repo.org/packages/")
+                                ("melpa" . "http://melpa.milkbox.net/packages/")))
+       (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+   #+END_SRC
+** UI
+   #+BEGIN_SRC emacs-lisp 
+     (setq inhibit-startup-screen t)
+     (scroll-bar-mode -1)
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (blink-cursor-mode -1)
+     (line-number-mode t)
+     (column-number-mode t)
+     (size-indication-mode t)
+     (fset 'yes-or-no-p 'y-or-n-p)
+     (load-theme 'solarized-dark t)
+
+     (add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
+     (set-default-font "Inconsolata-14")
+     ;;-- Death to tabs!
+     (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+     (setq-default tab-width 8)            ;; but maintain correct appearance
+     (require 'uniquify) ;; better unique buffer names
+     (require 'company)
+     (add-hook 'after-init-hook 'global-company-mode)
+
+     (global-set-key (kbd "C-?") 'help-command)
+     (global-set-key (kbd "M-?") 'mark-paragraph)
+     (global-set-key (kbd "C-h") 'delete-backward-char)
+     (global-set-key (kbd "M-h") 'backward-kill-word)
+   #+END_SRC
+** IDO and Icomplete
+   #+BEGIN_SRC emacs-lisp 
+     (setq ido-enable-flex-matching t)
+     (setq ido-everywhere t)
+     (ido-mode 1)
+     (icomplete-mode 1)
+   #+END_SRC
+** Yasnippet
+   #+BEGIN_SRC emacs-lisp 
+     (yas/global-mode 1)
+   #+END_SRC
+** Jumping around
+#+BEGIN_SRC emacs-lisp 
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+#+END_SRC
+** Other
+#+BEGIN_SRC emacs-lisp 
+  ;;-- Set default browser
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "firefox")
+  ;; Buffer Management
+  (defun kill-other-buffers ()
+    "Kill all buffers but the current one.
+  Don't mess with special buffers."
+    (interactive)
+    (dolist (buffer (buffer-list))
+      (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+        (kill-buffer buffer))))
+  (global-set-key (kbd "C-c k") 'kill-other-buffers)
+#+END_SRC
+*** Eval and Replace
+    #+BEGIN_SRC emacs-lisp
+      (defun eval-and-replace ()                     
+        "Replace the preceding sexp with its value." 
+        (interactive)                                
+        (backward-kill-sexp)                         
+        (condition-case nil                          
+            (prin1 (eval (read (current-kill 0)))    
+                   (current-buffer))                 
+          (error (message "Invalid expression")      
+                 (insert (current-kill 0)))))
+        (global-set-key (kbd "C-c e") 'eval-and-replace)
+    #+END_SRC
+* Code
+   #+BEGIN_SRC emacs-lisp  :export code
+     (load "auctex.el" nil t t)
+     (require 'tex-mik)
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+     (setq-default TeX-master nil)
+     (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+     (setq reftex-plug-into-AUCTeX t)
+
+     (require 'dbus)
+
+     (defun un-urlify (fname-or-url)
+       "A trivial function that replaces a prefix of file:/// with just /."
+       (if (string= (substring fname-or-url 0 8) "file:///")
+           (substring fname-or-url 7)
+         fname-or-url))
+
+     (defun th-evince-sync (file linecol &rest ignored)
+       (let* ((fname (un-urlify file))
+              (buf (find-buffer-visiting fname))
+              (line (car linecol))
+              (col (cadr linecol)))
+         (if (null buf)
+             (message "[Synctex]: %s is not opened..." fname)
+           (switch-to-buffer buf)
+           (goto-line (car linecol))
+           (unless (= col -1)
+             (move-to-column col)))))
+
+     (defvar *dbus-evince-signal* nil)
+
+     (defun enable-evince-sync ()
+       (require 'dbus)
+       (when (and
+              (eq window-system 'x)
+              (fboundp 'dbus-register-signal))
+         (unless *dbus-evince-signal*
+           (setf *dbus-evince-signal*
+                 (dbus-register-signal
+                  :session nil "/org/gnome/evince/Window/0"
+                  "org.gnome.evince.Window" "SyncSource"
+                  'th-evince-sync)))))
+
+     (add-hook 'LaTeX-mode-hook 'enable-evince-sync)
+   #+END_SRC
+

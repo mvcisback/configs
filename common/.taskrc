@@ -1,14 +1,14 @@
 data.location=~/.task
 
-context.office=-home -marissa_house -sri
-context.home=-office -marissa_house -sri
-context.marissa=-home -office -sri
-context.out=-home -office -marissa_house -sri
-context.sri=+sri
+context.office=-home -marissa_house project.not:ChanlatteRamirezWedding project.not:relationship project.not:1833 project.not:reading
+context.home=-office -marissa_house project.not:reading
+context.marissa_house=-home -office -sri project.not:reading
+context.out=-home -office -marissa_house project.not:reading
+context.reading=project:reading
 
-include /usr/share/taskwarrior/solarized-dark-256.theme
+# include /usr/share/doc/task/rc/no-color.theme
 
-uda.priority.values=H,,L
+uda.priority.values=H,M,L
 
 urgency.next.coefficient=15.0                   # +next tag
 urgency.due.coefficient=12.0                    # overdue or near due date
@@ -24,10 +24,13 @@ urgency.blocked.coefficient=-5.0                # blocked by other tasks
 urgency.waiting.coefficient=-3.0                # waiting task
 urgency.user.project.<project>.coefficient=5.0  # specific project
 urgency.uda.priority.H.coefficient=10
-urgency.uda.priority.L.coefficient=-1
+urgency.uda.priority.M.coefficient=0
+urgency.uda.priority.L.coefficient=-10
 
 report.next.labels=ID,Description,Active,Deps,Tag,S,P,Due,Until
 report.next.columns=id,description,start.age,depends,tags,scheduled.countdown,priority,due.remaining,until.remaining
 
 verbose=no
-context=marissa
+nag=
+color=off
+context=office

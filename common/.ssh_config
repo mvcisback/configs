@@ -3,9 +3,6 @@ Host eecs-repo
     User repoman
     IdentityFile ~/.ssh/repo_eecs
 
-Host github.com
-     HostName github.com
-     IdentityFile ~/.ssh/github
     
 Host bitbucket.org
      IdentityFile ~/.ssh/bitbucket
@@ -21,7 +18,7 @@ Host hal0001
 
 Host verifun
      HostName verifun.eecs.berkeley.edu
-     User mvc
+     User marcell
      IdentityFile ~/.ssh/verifun
 
 Host sauron
@@ -32,3 +29,7 @@ Host sauron
 Host zero
      HostName 128.32.171.213
      User mvc
+
+Host chatbox
+     HostName 107.170.232.246
+     IdentityFile ~/.ssh/chatbox
