@@ -59,7 +59,7 @@
    #+END_SRC
 ** Yasnippet
    #+BEGIN_SRC emacs-lisp 
-     (yas/global-mode 1)
+     (yas-global-mode 1)
    #+END_SRC
 ** Jumping around
 #+BEGIN_SRC emacs-lisp 

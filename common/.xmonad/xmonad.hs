@@ -117,12 +117,8 @@ main = xmonad gnomeConfig {
        terminal = myTerminal,
        startupHook = startupHook gnomeConfig
           >> setWMName "LG3D"
-          >> spawn "tmux new-session -d"
-          >> spawn "emacs --daemon"
-          >> spawn "setxkbmap -option ctrl:nocaps"
-          >> spawn "xcompmgr"
-          >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
-          >> spawn "/usr/bin/numlockx on"
-          >> spawn "urxvtd"
-          >> spawn "syncthing"
+	  >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
+--          >> spawn "tmux new-session -d"
+--          >> spawn "urxvtd"
+--          >> spawn "syncthing"
      }
