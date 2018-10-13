@@ -23,33 +23,6 @@
        (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
    #+END_SRC
-** UI
-   #+BEGIN_SRC emacs-lisp 
-     (setq inhibit-startup-screen t)
-     (scroll-bar-mode -1)
-     (menu-bar-mode -1)
-     (tool-bar-mode -1)
-     (blink-cursor-mode -1)
-     (line-number-mode t)
-     (column-number-mode t)
-     (size-indication-mode t)
-     (fset 'yes-or-no-p 'y-or-n-p)
-     (load-theme 'solarized-dark t)
-
-     (add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
-     (set-default-font "Inconsolata-14")
-     ;;-- Death to tabs!
-     (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
-     (setq-default tab-width 8)            ;; but maintain correct appearance
-     (require 'uniquify) ;; better unique buffer names
-     (require 'company)
-     (add-hook 'after-init-hook 'global-company-mode)
-
-     (global-set-key (kbd "C-?") 'help-command)
-     (global-set-key (kbd "M-?") 'mark-paragraph)
-     (global-set-key (kbd "C-h") 'delete-backward-char)
-     (global-set-key (kbd "M-h") 'backward-kill-word)
-   #+END_SRC
 ** IDO and Icomplete
    #+BEGIN_SRC emacs-lisp 
      (setq ido-enable-flex-matching t)
@@ -79,6 +52,7 @@
       (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
         (kill-buffer buffer))))
   (global-set-key (kbd "C-c k") 'kill-other-buffers)
+  (require 'git-commit)
 #+END_SRC
 *** Eval and Replace
     #+BEGIN_SRC emacs-lisp
@@ -141,5 +115,71 @@
                   'th-evince-sync)))))
 
      (add-hook 'LaTeX-mode-hook 'enable-evince-sync)
+
+     (defun my-latex-mode-setup ()
+       "Redefines and updates variables for various customizations."
+       (setq LaTeX-paragraph-commands
+             '("IF" "STATE" "LOOP" "FOR"))
+       (setq LaTeX-begin-regexp
+             (concat "begin\\b" "\\|IF\\b" "\\|LOOP\\b" "\\|FOR\\b"))
+       (setq LaTeX-end-regexp
+             (concat "end\\b" "\\|ENDIF\\b" "\\|ENDLOOP\\b" "\\|ENDFOR\\b"))
+       (setq LaTeX-paragraph-commands-regexp (LaTeX-paragraph-commands-regexp-make))
+       )
+
+     (add-hook 'LaTeX-mode-hook 'my-latex-mode-setup)
+
+     (require 'web-mode)
+     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+     (setq web-mode-enable-auto-pairing t)
+     (setq web-mode-enable-css-colorization t)
+     (setq web-mode-enable-block-face t)
+     (setq web-mode-enable-part-face t)
+     (setq web-mode-enable-comment-interpolation t)
+     (setq web-mode-enable-heredoc-fontification t)
+     (setq web-mode-enable-current-column-highlight t)
    #+END_SRC
 
+* UI
+   #+BEGIN_SRC emacs-lisp 
+     (setq inhibit-startup-screen t)
+     (scroll-bar-mode -1)
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (blink-cursor-mode -1)
+     (line-number-mode t)
+     (column-number-mode t)
+     (size-indication-mode t)
+     (fset 'yes-or-no-p 'y-or-n-p)
+
+     (add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
+     (set-default-font "Inconsolata-14")
+     ;;-- Death to tabs!
+     (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+     (setq-default tab-width 8)            ;; but maintain correct appearance
+     (require 'uniquify) ;; better unique buffer names
+     (require 'company)
+     (add-hook 'after-init-hook 'global-company-mode)
+
+     (global-set-key (kbd "C-?") 'help-command)
+     (global-set-key (kbd "M-?") 'mark-paragraph)
+     (global-set-key (kbd "C-h") 'delete-backward-char)
+     (global-set-key (kbd "M-h") 'backward-kill-word)
+     (load-theme 'solarized-dark t)
+     (set-cursor-color "DarkGrey")
+
+
+     (require 'frame)
+     (defun set-cursor-hook (frame)
+     (modify-frame-parameters
+       frame (list (cons 'cursor-color "DarkGrey"))))
+
+     (add-hook 'after-make-frame-functions 'set-cursor-hook)
+   #+END_SRC

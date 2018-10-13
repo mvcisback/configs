@@ -116,8 +116,9 @@ main = xmonad gnomeConfig {
        keys = myKeys,
        terminal = myTerminal,
        startupHook = startupHook gnomeConfig
-          >> setWMName "LG3D"
-	  >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
+         >> setWMName "LG3D"
+	 >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
+         >> spawn "keynav"
 --          >> spawn "tmux new-session -d"
 --          >> spawn "urxvtd"
 --          >> spawn "syncthing"

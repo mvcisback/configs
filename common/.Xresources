@@ -74,7 +74,7 @@ URxvt.intensityStyles: false
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*underlineColor: yellow
-URxvt*font: xft:inconsolata:size=8:antialias=true
+URxvt*font: xft:inconsolata:size=6:antialias=true
 URxvt*depth: 32
 URxvt*borderless: 1
 URxvt*scrollBar: false
@@ -82,9 +82,14 @@ URxvt*loginShell: true
 Urxvt*secondaryScroll: true # Enable Shift-PageUp/Down in screen
 URxvt*saveLines: 5000
 URxvt*termName: rxvt-unicode
-URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: /usr/bin/firefox
+URxvt.perl-ext-common: default,matcher,url-select,font-size
+URxvt.url-select.launcher: firefox
+URxvt.url-launcher: "/usr/bin/env firefox"
 URxvt.matcher.button: 1
+URxvt.colorUL: #4682B4
+URxvt.keysym.C-plus: font-size:increase
+URxvt.keysym.C-equal: font-size:reset
+URxvt.keysym.C-minus: font-size:decrease
 
 
 Xft.dpi: 210
