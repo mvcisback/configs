@@ -39,7 +39,7 @@
 	pager =
 	excludesfile = ~/.gitignore
 	safecrlf = true
-	editor = $EDITOR
+	editor = "emacsclient -c"
 [push]
 	default = matching
 [user]
