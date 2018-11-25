@@ -81,7 +81,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-tomorrow color-theme-solarized yasnippet yaml-mode undo-tree solarized-theme rust-mode protobuf-mode nix-mode nameless markdown-mode magit company cdlatex beacon auctex ace-jump-mode)))
+    (impatient-mode color-theme-sanityinc-tomorrow color-theme-solarized yasnippet yaml-mode undo-tree solarized-theme rust-mode protobuf-mode nix-mode nameless markdown-mode magit company cdlatex beacon auctex ace-jump-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))

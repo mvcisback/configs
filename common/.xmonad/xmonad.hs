@@ -1,9 +1,13 @@
 import XMonad
-import XMonad.Config.Gnome
+import XMonad.Config.Kde
 import XMonad.Hooks.SetWMName
 import System.Exit
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
+import           XMonad.Hooks.ManageDocks
+
+myManageHook = composeAll
+  [ className =? "plasmashell"  --> doFloat ]
 
 myTerminal :: String
 myTerminal = "urxvtc -e tmux -2 attach"
@@ -111,13 +115,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-main = xmonad gnomeConfig {
+main = xmonad kdeConfig {
        modMask = myModMask,
        keys = myKeys,
        terminal = myTerminal,
-       startupHook = startupHook gnomeConfig
-         >> setWMName "LG3D"
-	 >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
+--       manageHook = myManageHook <+> (manageHook kde4Config),
+       startupHook = startupHook kdeConfig
+--         >> setWMName "LG3D"
+--	 >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
          >> spawn "keynav"
 --          >> spawn "tmux new-session -d"
 --          >> spawn "urxvtd"
