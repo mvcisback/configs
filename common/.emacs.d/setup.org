@@ -53,6 +53,18 @@
         (kill-buffer buffer))))
   (global-set-key (kbd "C-c k") 'kill-other-buffers)
   (require 'git-commit)
+  (setq make-backup-files nil) ; stop creating backup~ files
+  (setq auto-save-default nil) ; stop creating #autosave# files
+
+  ;; Org-mode
+  (setq org-default-notes-file (concat org-directory "/main.org"))
+  (define-key global-map "\C-cc" 'org-capture)
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-switchb)
+  (setq org-log-done t)
+  (setq org-agenda-files (list "~/org/main.org"))
 #+END_SRC
 *** Eval and Replace
     #+BEGIN_SRC emacs-lisp
