@@ -1,13 +1,12 @@
 import XMonad
 import XMonad.Config.Kde
 import XMonad.Hooks.SetWMName
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import           XMonad.Hooks.ManageDocks
 
-myManageHook = composeAll
-  [ className =? "plasmashell"  --> doFloat ]
 
 myTerminal :: String
 myTerminal = "urxvtc -e tmux -2 attach"
@@ -31,6 +30,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     , ((modm .|. shiftMask .|. controlMask , xK_Return), spawn $ newTerminal)
+
+    -- media controls
+    , ((0 , 0x1008FF11), spawn "amixer -q sset Master 2%-")
+    , ((0 , 0x1008FF13), spawn "amixer -q sset Master 2%+")
+    , ((0 , 0x1008FF12), spawn "amixer set Master toggle")
+
+    -- backlight
+    --, ((0 , xF86XK_MonBrightnessUp), spawn "xbacklight -inc 20")
+    --, ((0 , xF86XK_MonBrightnessDown), spawn "xbacklight -dec 20")
 
     -- launch dmenu
     , ((modm, xK_p), spawn "dmenu_run")
@@ -115,15 +123,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-main = xmonad kdeConfig {
+main = xmonad defaultConfig {
+       focusFollowsMouse = False,
        modMask = myModMask,
        keys = myKeys,
        terminal = myTerminal,
---       manageHook = myManageHook <+> (manageHook kde4Config),
-       startupHook = startupHook kdeConfig
+--       manageHook = myManageHook <+> (manageHook kdeConfig),
+       startupHook = spawn "keynav" >> spawn "dunst"
+-- >>startupHook kdeConfig
 --         >> setWMName "LG3D"
 --	 >> spawn "feh --bg-scale /home/mvc/.wallpaper.jpg"
-         >> spawn "keynav"
+--          >> spawn "keynav"
 --          >> spawn "tmux new-session -d"
 --          >> spawn "urxvtd"
 --          >> spawn "syncthing"

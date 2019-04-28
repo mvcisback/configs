@@ -1,0 +1,56 @@
+[general]
+pythonfile = ~/.offlineimap.py
+ui = ttyui
+#ui = basic
+
+accounts = protonmail
+
+[Account protonmail]
+localrepository = protonmail-local
+remoterepository = protonmail-remote
+#autorefresh = 0.2
+#quick = 10
+postsynchook = notmuch new
+
+
+[Repository protonmail-local]
+type = Maildir
+localfolders = ~/Mail/ProtonMail
+sync_deletes = yes
+
+
+[Repository protonmail-remote]
+type = IMAP
+remoteport = 1143
+remotehost = 127.0.0.1
+remoteuser = marcell.vc@pm.me
+remotepass = XtVu5cr0XrWeEXphik3l_g
+# keepalive = 60
+# holdconnectionopen = yes
+
+expunge = yes
+
+# sync only these folders
+folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent']
+
+# is broken, but connecting locally to bridge so should be ok
+ssl = no
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+postsynchook = notmuch new
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/Mail/Gmail
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = mvcisback@gmail.com
+remotepasseval = get_pass()
+realdelete = no
+maxconnections = 3
+folderfilter = lambda folder: folder.startswith('[Gmail]/All Mail')
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+

@@ -57,6 +57,8 @@
   (setq auto-save-default nil) ; stop creating #autosave# files
 
   ;; Org-mode
+  (require 'org-notmuch)
+  (require 'org-checklist)
   (setq org-default-notes-file (concat org-directory "/main.org"))
   (define-key global-map "\C-cc" 'org-capture)
   (global-set-key "\C-cl" 'org-store-link)
@@ -64,7 +66,23 @@
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-switchb)
   (setq org-log-done t)
-  (setq org-agenda-files (list "~/org/main.org"))
+  (setq org-startup-indented t)
+
+  (setq org-todo-keywords
+    '((sequence "TODO" "DONE" )))
+  (setq org-agenda-files '("~/org" "~/org/reviews"))
+  (add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+(setq org-capture-templates
+ '(("t" "Todo" entry (file+headline "~/org/main.org" "Tasks")
+        "* TODO %?\n  %i\n  %a")
+   ("c" "Cookbook" entry (file "~/org/cookbook.org")
+         "%(org-chef-get-recipe-from-url)"
+         :empty-lines 1)
+  ("m" "Manual Cookbook" entry (file "~/org/cookbook.org")
+      "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")))
+
 #+END_SRC
 *** Eval and Replace
     #+BEGIN_SRC emacs-lisp
@@ -158,6 +176,13 @@
      (setq web-mode-enable-heredoc-fontification t)
      (setq web-mode-enable-current-column-highlight t)
    #+END_SRC
+
+* Email
+#+BEGIN_SRC emacs-lisp 
+  (require 'notmuch)
+  ;;(add-to-list 'auto-mode-alist '("mvc@OogieBoogie" . notmuch-message-mode))
+
+#+END_SRC
 
 * UI
    #+BEGIN_SRC emacs-lisp 

@@ -74,7 +74,7 @@ URxvt.intensityStyles: false
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*underlineColor: yellow
-URxvt*font: xft:inconsolata:size=6:antialias=true
+URxvt*font: xft:inconsolata:size=12:antialias=true
 URxvt*depth: 32
 URxvt*borderless: 1
 URxvt*scrollBar: false
@@ -92,7 +92,7 @@ URxvt.keysym.C-equal: font-size:reset
 URxvt.keysym.C-minus: font-size:decrease
 
 
-Xft.dpi: 210
+Xft.dpi: 140
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
