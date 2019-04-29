@@ -8,32 +8,29 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-  boot.initrd.luks.devices = [ { device = "/dev/disk/by-uuid/fe40ff72-4117-42fc-a71d-4c0274038310"; name = "vault"; } ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ]; 
+  boot.kernelModules = [ "kvm-intel" "wl" ];
+  boot.extraModulePackages = [ 
+     config.boot.kernelPackages.broadcom_sta 
+     pkgs.linuxPackages.v4l2loopback
+];
 
   fileSystems."/" =
-    { device = "/dev/ubuntu-vg/nixos";
-      fsType = "btrfs";
-    };
-
-  fileSystems."/matlab" =
-    { device = "/dev/ubuntu-vg/matlab";
+    { device = "/dev/disk/by-uuid/d6a59a2a-0b3b-444a-9dc5-a7529e0c4427";
       fsType = "ext4";
     };
 
-  fileSystems."/steam" =
-    { device = "/dev/ubuntu-vg/steam";
-      fsType = "ext4";
-    };
+  boot.initrd.luks.devices."nixosroot".device = "/dev/disk/by-uuid/01052395-e4d6-4409-ac48-1dce518ff0ce";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F236-464E";
+    { device = "/dev/disk/by-uuid/67E3-17ED";
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/feee249a-e514-4f4d-84ff-694a4c82ca71"; }
+    ];
 
-  nix.maxJobs = 8;
+  nix.maxJobs = lib.mkDefault 4;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
